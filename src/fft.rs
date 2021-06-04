@@ -4,7 +4,7 @@ use std::f64::consts::PI;
 
 use num::complex::Complex;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct RootOfUnity {
     pub n: u64,
     k: u64
@@ -29,10 +29,11 @@ impl RootOfUnity {
     }
 }
 
-pub fn fft (p: Vec<u8>,  z: RootOfUnity) -> Vec<Complex<f64>>{
+pub fn fft (p: Vec<u8>,  z: &RootOfUnity) -> Vec<Complex<f64>>{
 
     if z.n == z.k {
-        return vec![Complex::new(p.iter().sum::<u8>() as f64, 0.0 )]
+        let v = p.iter().sum::<u8>();
+        return vec![Complex::new(v as f64, 0.0 )];
     } 
 
     let mut e: Vec<u8> = Vec::new();
@@ -47,16 +48,20 @@ pub fn fft (p: Vec<u8>,  z: RootOfUnity) -> Vec<Complex<f64>>{
         }
     }
 
-    let E = fft(e, z.pow(2));
-    let O = fft(o, z.pow(2));
+    let E = fft(e, &z.pow(2));
+    let O = fft(o, &z.pow(2));
 
-    let mut P: Vec<Complex<f64>> = vec![Complex::new(0.0, 0.0); (z.n / z.k) as usize];
+    let C = z.n / z.k; 
+
+    println!("{}", C);
+
+    let mut P: Vec<Complex<f64>> = vec![Complex::new(0.0, 0.0); C as usize];
 
     println!("{}", P.len() / 2);
 
-    for i in 0..(z.n / z.k) {
+    for i in 0..(C / 2) {
         P[i as usize] = E[i as usize] + z.pow(i as u64).eval() * O[i as usize]; 
-        P[(i as u64 + z.n / 2) as usize] = E[i as usize] - z.pow(i as u64).eval() * O[i as usize]; 
+        P[(i as u64 + (C / 2)) as usize] = E[i as usize] - z.pow(i as u64).eval() * O[i as usize]; 
     }
 
     return P
