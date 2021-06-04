@@ -1,11 +1,18 @@
 mod sorting;
 mod fft;
 
+use num::complex::Complex;
+
 fn main() {
-    let A: Vec<u8> = vec![1, 2, 3, 4];
-    let B: Vec<u8> = vec![1, 2, 3, 4];
+    let a: Vec<u8> = vec![1, 2, 3, 4];
+    let b: Vec<u8> = vec![1, 2, 3, 4];
 
-    let z: fft::RootOfUnity = fft::RootOfUnity::new((A.len() * 2) as u64); 
+    let z: fft::RootOfUnity = fft::RootOfUnity::new((a.len() * 2) as u64); 
 
-    println!("{:?}", fft::fft(A, z));
+    let A = fft::fft(a, &z);
+    let B = fft::fft(b, &z);
+
+    let C: Vec<Complex<f64>> = A.iter().zip(B.iter()).map(|(&x, &y)| x * y).collect();
+
+    println!("{:?}", C)
 }
