@@ -54,7 +54,7 @@ pub fn fft(p: &Vec<u8>,  z: &RootOfUnity) -> Vec<C64> {
     return P
 }
 
-
+//this is a fucking terrible way to do things but I will fix once I figure out generics
 pub fn ifft(p: &Vec<C64>,  z: &RootOfUnity) -> Vec<C64> {
     if z.n == z.k {
         return vec![p.iter().sum()];
