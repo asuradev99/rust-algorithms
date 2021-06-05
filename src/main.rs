@@ -5,6 +5,7 @@ mod fft;
 
 use num::complex::Complex;
 
+//absolutely horrible function here, just made it as quick as possible, will fix soon
 fn main() {
     let a: Vec<u8> = vec![1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
     let b: Vec<u8> = vec![1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
