@@ -9,3 +9,4 @@ This is a collection of algorithms I have implemented in Rust.
 
 ## List of WIP Algorithms: 
 - Fast Fourier Transform
+- Standard Multiplication Algorithm (Long Multiplication)
