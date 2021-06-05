@@ -4,13 +4,13 @@ use std::fmt;
 pub fn insertion_sort<T: PartialOrd>(arr: &mut [T]) {
     for i in 1..arr.len() {
         let mut j = i;
-        while j > 0 && arr[j - 1] >  arr[j] {
+        while j > 0 && arr[j - 1] > arr[j] {
             arr.swap(j - 1, j);
             j -= 1;
         }
     }
 }
- 
+
 pub fn selection_sort<T: PartialOrd>(arr: &mut [T]) {
     for i in 0..(arr.len() - 1) {
         let mut s = i;
@@ -23,7 +23,7 @@ pub fn selection_sort<T: PartialOrd>(arr: &mut [T]) {
     }
 }
 
-pub fn merge_sort<T: PartialOrd + Copy + fmt::Debug>(arr: &mut [T]) { 
+pub fn merge_sort<T: PartialOrd + Copy + fmt::Debug>(arr: &mut [T]) {
     if arr.len() > 1 {
         let m: usize = arr.len() / 2;
 
@@ -52,5 +52,4 @@ pub fn merge<T: PartialOrd + Copy + fmt::Debug>(arr: &mut [T], l: &[T], r: &[T])
     } else {
         arr[k..].copy_from_slice(&l[i..]);
     }
-   
 }

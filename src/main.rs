@@ -1,7 +1,7 @@
 #![allow(dead_code, non_snake_case, unused_variables)]
 
-mod sorting;
 mod fft;
+mod sorting;
 
 use num::complex::Complex;
 
@@ -10,13 +10,13 @@ fn main() {
     let a: Vec<u8> = vec![1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
     let b: Vec<u8> = vec![1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
-    let mut z: fft::RootOfUnity = fft::RootOfUnity::new((a.len() * 2) as isize); 
+    let mut z: fft::RootOfUnity = fft::RootOfUnity::new((a.len() * 2) as isize);
 
     let A = fft::fft(&a, &z);
     let B = fft::fft(&b, &z);
 
     let C: Vec<Complex<f64>> = A.iter().zip(B.iter()).map(|(&x, &y)| x * y).collect();
-    z.p = -1; 
+    z.p = -1;
 
     let D: Vec<Complex<f64>> = fft::ifft(&C, &z);
     let mut E: Vec<f64> = Vec::new();
@@ -26,6 +26,5 @@ fn main() {
         E.push(e.re.round());
     }
 
-    println!("{:?}", E)
-
+    println!("{:?}", E);
 }

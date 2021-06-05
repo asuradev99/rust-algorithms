@@ -1,20 +1,19 @@
 #![allow(unused_imports, dead_code, non_snake_case, unused_variables)]
-
 #![feature(test)]
 extern crate test;
 
-use test::Bencher; 
-use rand::thread_rng;
 use rand::seq::SliceRandom;
+use rand::thread_rng;
+use test::Bencher;
 
 use num::complex::Complex;
 
-mod sorting;
 mod fft;
+mod sorting;
 
 // #[bench]
 // fn merge_test(b: &mut Bencher) {
-    
+
 //     b.iter(|| {
 //         let min: i32 = 0;
 //         let max: i32 = 10000;
@@ -48,11 +47,17 @@ mod fft;
 
 #[bench]
 fn fft_test(b: &mut Bencher) {
-    b.iter(||{
-        let a: Vec<u8> = vec![1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-        let b: Vec<u8> = vec![1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+    b.iter(|| {
+        let a: Vec<u8> = vec![
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1,
+        ];
+        let b: Vec<u8> = vec![
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1,
+        ];
 
-        let z: fft::RootOfUnity = fft::RootOfUnity::new((a.len() * 2) as isize); 
+        let z: fft::RootOfUnity = fft::RootOfUnity::new((a.len() * 2) as isize);
 
         let A = fft::fft(&a, &z);
         let B = fft::fft(&b, &z);
