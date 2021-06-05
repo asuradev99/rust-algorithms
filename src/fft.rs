@@ -14,7 +14,7 @@ pub struct RootOfUnity {
 }
 
 impl RootOfUnity {
-    pub fn new( n: usize) -> Self {
+    pub fn new(n: usize) -> Self {
         RootOfUnity {
             n: n,
             k: 1,
@@ -27,14 +27,14 @@ impl RootOfUnity {
     fn pow(&self, j: usize) -> RootOfUnity {
         RootOfUnity {
             n: self.n,
-            k: self.k * j,
+            k: self.k * j, 
         }
     }
 }
 
-pub fn fft (p: &Vec<u8>,  z: &RootOfUnity) -> Vec<C64>{
+pub fn fft(p: &Vec<u8>,  z: &RootOfUnity) -> Vec<C64> {
     if z.n == z.k {
-        return vec![Complex::new((p.iter().sum::<u8>()) as f64, 0.0)];
+         return vec![Complex::from(p.iter().sum::<u8>() as f64)]
     } 
     let mut a: [Vec<u8>; 2] = [Vec::new(), Vec::new()];
     for i in 0..(p.len()) {
@@ -51,3 +51,22 @@ pub fn fft (p: &Vec<u8>,  z: &RootOfUnity) -> Vec<C64>{
     return P
 }
 
+
+pub fn ifft(p: &Vec<C64>,  z: &RootOfUnity) -> Vec<C64> {
+    if z.n == z.k {
+        return vec![p.iter().sum()];
+    } 
+    let mut a: [Vec<C64>; 2] = [Vec::new(), Vec::new()];
+    for i in 0..(p.len()) {
+        a[i % 2].push(p[i]);
+    }
+    let E = ifft(&a[0], &z.pow(2));
+    let O = ifft(&a[1], &z.pow(2));
+    let C = z.n / z.k; 
+    let mut P: Vec<C64> = vec![Complex::new(0.0, 0.0); C];
+    for i in 0..(C / 2) {
+        P[i] = E[i] + z.pow(i).eval() * O[i]; 
+        P[(i + (C / 2))] = E[i] - z.pow(i).eval() * O[i]; 
+    }
+    return P
+}
