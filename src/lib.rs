@@ -52,7 +52,7 @@ fn fft_test(b: &mut Bencher) {
         let a: Vec<u8> = vec![1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
         let b: Vec<u8> = vec![1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
-        let z: fft::RootOfUnity = fft::RootOfUnity::new(a.len() * 2); 
+        let z: fft::RootOfUnity = fft::RootOfUnity::new((a.len() * 2) as isize); 
 
         let A = fft::fft(&a, &z);
         let B = fft::fft(&b, &z);
