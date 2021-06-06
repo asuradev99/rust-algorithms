@@ -1,31 +1,41 @@
 #![allow(dead_code, non_snake_case, unused_variables)]
 
-mod sorting;
 mod fft;
+mod sorting;
+mod mul; 
 
 use num::complex::Complex;
+use rand::Rng;
 
 //absolutely horrible function here, just made it as quick as possible, will fix soon
 fn main() {
-    let a: Vec<u8> = vec![1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-    let b: Vec<u8> = vec![1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+    
+    // println!("{:?}", mul::mult(A, B));
 
-    let mut z: fft::RootOfUnity = fft::RootOfUnity::new((a.len() * 2) as isize); 
+    // let mut rng = rand::thread_rng();
+    // let n: i64 = 8;
+    // let a: Vec<u8> = (0..n).map(|_| rng.gen_range(0..10)).collect();
+    // let b: Vec<u8> = (0..n).map(|_| rng.gen_range(0..10)).collect();
 
-    let A = fft::fft(&a, &z);
-    let B = fft::fft(&b, &z);
+    // println!("{:?} * {:?}", a, b);
 
-    let C: Vec<Complex<f64>> = A.iter().zip(B.iter()).map(|(&x, &y)| x * y).collect();
-    z.p = -1; 
+    // let mut z: fft::RootOfUnity = fft::RootOfUnity::new((a.len() * 2) as isize);
 
-    let D: Vec<Complex<f64>> = fft::ifft(&C, &z);
-    let mut E: Vec<f64> = Vec::new();
+    // let A = fft::fft(&a, &z);
+    // let B = fft::fft(&b, &z);
 
-    for i in D {
-        let e: Complex<f64> = i / Complex::new((a.len() * 2) as f64, 0.0);
-        E.push(e.re.round());
-    }
+    // let C: Vec<Complex<f64>> = A.iter().zip(B.iter()).map(|(&x, &y)| x * y).collect();
+    // z.p = -1;
 
-    println!("{:?}", E)
+    // let D: Vec<Complex<f64>> = fft::ifft(&C, &z);
+    // let mut E: Vec<f64> = Vec::new();
+
+    // for i in D {
+    //     let e: Complex<f64> = i / Complex::new((a.len() * 2) as f64, 0.0);
+    //     E.push(e.re.round());
+    // }
+
+    // println!("FFT result: {:?}, {:?}", E, E.len())
+
 
 }
