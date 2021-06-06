@@ -10,32 +10,15 @@ use rand::Rng;
 //absolutely horrible function here, just made it as quick as possible, will fix soon
 fn main() {
     
-    // println!("{:?}", mul::mult(A, B));
+    //println!("{:?}", mul::mult(A, B));
 
-    // let mut rng = rand::thread_rng();
-    // let n: i64 = 8;
-    // let a: Vec<u8> = (0..n).map(|_| rng.gen_range(0..10)).collect();
-    // let b: Vec<u8> = (0..n).map(|_| rng.gen_range(0..10)).collect();
+    let mut rng = rand::thread_rng();
+    let n: i64 = 4;
+    let a: Vec<u8> = (0..n).map(|_| rng.gen_range(0..10)).collect();
+    let b: Vec<u8> = (0..n).map(|_| rng.gen_range(0..10)).collect();
 
-    // println!("{:?} * {:?}", a, b);
+    println!("{:?} * {:?}", a, b);
 
-    // let mut z: fft::RootOfUnity = fft::RootOfUnity::new((a.len() * 2) as isize);
-
-    // let A = fft::fft(&a, &z);
-    // let B = fft::fft(&b, &z);
-
-    // let C: Vec<Complex<f64>> = A.iter().zip(B.iter()).map(|(&x, &y)| x * y).collect();
-    // z.p = -1;
-
-    // let D: Vec<Complex<f64>> = fft::ifft(&C, &z);
-    // let mut E: Vec<f64> = Vec::new();
-
-    // for i in D {
-    //     let e: Complex<f64> = i / Complex::new((a.len() * 2) as f64, 0.0);
-    //     E.push(e.re.round());
-    // }
-
-    // println!("FFT result: {:?}, {:?}", E, E.len())
-
-
+    println!("FFT result: {:?}", fft::fft_poly(a.clone(), b.clone()));
+    println!("Mul result: {:?}", mul::mult(a, b));
 }

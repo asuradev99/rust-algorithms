@@ -3,6 +3,7 @@
 use std::f64::consts::PI;
 
 use num::complex::Complex;
+use num::traits::Pow;
 
 type C64 = Complex<f64>;
 
@@ -52,7 +53,7 @@ pub fn fft(p: &Vec<u8>, z: &RootOfUnity) -> Vec<C64> {
     return P;
 }
 
-//this is a fucking terrible way to do things but I will fix once I figure out generics
+//this is a terrible way to do things but I will fix once I figure out generics
 pub fn ifft(p: &Vec<C64>, z: &RootOfUnity) -> Vec<C64> {
     if z.n == z.k {
         return vec![p.iter().sum()];
@@ -70,4 +71,19 @@ pub fn ifft(p: &Vec<C64>, z: &RootOfUnity) -> Vec<C64> {
         P[(i + (C / 2))] = E[i] - z.pow(i as isize).eval() * O[i];
     }
     return P;
+}
+
+pub fn fft_poly(a: Vec<u8>, b: Vec<u8>) -> Vec<usize> {
+    let mut z: RootOfUnity = RootOfUnity::new((a.len() * 2) as isize);
+    let A = fft(&a, &z);
+    let B = fft(&b, &z);
+    let C: Vec<Complex<f64>> = A.iter().zip(B.iter()).map(|(&x, &y)| x * y).collect();
+    z.p = -1;
+    let D: Vec<Complex<f64>> = ifft(&C, &z);
+    let mut E: Vec<usize> = Vec::new();
+    for i in D {
+        let e: Complex<f64> = i / Complex::new((a.len() * 2) as f64, 0.0);
+        E.push(e.re.round() as usize);
+    }
+    E
 }
