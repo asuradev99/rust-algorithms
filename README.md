@@ -12,7 +12,11 @@ This is a collection of algorithms I have implemented in Rust.
 - Fast Fourier Transform
 - Standard Multiplication Algorithm (Long Multiplication)
 
-## List of WIP Algorithms: 
+## List of WIP/Todo Algorithms: 
+- Quick Sort
+- Shell Sort
+- Pathfinding Algorithms (A*, Breadth/Depth First Search, Dijkstra, Distance-vector, etc.)
+
 
 
 
