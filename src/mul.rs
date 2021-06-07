@@ -26,28 +26,24 @@ pub fn add(A: &mut Vec<u8>, B: &mut Vec<u8>) -> Vec<u8> {
         Ordering::Equal => {},
     }
     let mut s = A.iter().zip(B.iter()).map(|(&a, &b)| a + b).collect::<Vec<u8>>();
-    for i in 0..(s.len() - 1) {
+    let mut i = 0;
+    while s[i] > 9 {
+        if i == s.len() {
+            s.push(0);
+        }
         s[i + 1] = s[i + 1] + s[i] / 10;
         s[i] = s[i] % 10;
-    }
-    if s[s.len() - 1] > 9 {
-        let l = s.len();
-        s.push(s[l - 1] / 10);
-        s[l - 1] = s[l - 1] % 10;
-    }
-    s 
+        i = i + 1; 
+    } 
+    s
 }
 
 pub fn mult (A: Vec<u8>, B: Vec<u8>) -> Vec<u8>{
     let mut P: Vec<u8> = Vec::new();
-    let mut S: usize = 0; 
-    for b in B {
-        let mut r = muls(&A, b);
-        r.reverse();
-        r.resize(r.len() + S, 0);
-        r.reverse();
+    for i in 0..B.len() {
+        let mut r = vec![0; i]; 
+        r.append(&mut muls(&A, B[i]));
         P = add(&mut P, &mut r);
-        S = S + 1;
     }
     P
 }

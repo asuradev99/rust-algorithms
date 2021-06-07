@@ -17,7 +17,7 @@ impl RootOfUnity {
     fn eval(&self) -> C64 {
         Complex::exp(Complex::new(
             0.0,
-            (self.p * 2 * self.k) as f64 * PI / self.n as f64,
+            (self.p * 2 * self.k) as f64 * PI / self.n as f64
         ))
     }
     fn pow(&self, j: isize) -> RootOfUnity {
@@ -49,12 +49,12 @@ pub fn fft(p: &Vec<C64>, z: &RootOfUnity) -> Vec<C64> {
 }
 
 pub fn fft_poly(a: Vec<C64>, b: Vec<C64>) -> Vec<usize> {
-    let z: RootOfUnity = RootOfUnity::new((a.len() * 2) as isize);
+    let z = RootOfUnity::new((a.len() * 2) as isize);
     let A = fft(&a, &z);
     let B = fft(&b, &z);
-    let C: Vec<C64> = A.iter().zip(B.iter()).map(|(&x, &y)| x * y).collect();
-    let C: Vec<C64> = fft(&C, &RootOfUnity{n: z.n, p: -1, k: z.k});
-    let E: Vec<usize> = C.iter().map(|&c|(c / Complex::new((a.len() * 2) as f64, 0.0)).re.round() as usize).collect();
+    let C = A.iter().zip(B.iter()).map(|(&x, &y)| x * y).collect();
+    let C = fft(&C, &RootOfUnity{n: z.n, p: -1, k: z.k});
+    let E = C.iter().map(|&c|(c / Complex::new((a.len() * 2) as f64, 0.0)).re.round() as usize).collect();
     E
 }
 
