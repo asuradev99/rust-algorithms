@@ -45,7 +45,7 @@ pub fn fft(p: &Vec<C64>, z: &RootOfUnity) -> Vec<C64> {
         P[i] = E[i] + z.pow(i as isize).eval() * O[i];
         P[i + c / 2] = E[i] - z.pow(i as isize).eval() * O[i];
     }
-    return P;
+    P
 }
 
 pub fn fft_poly(a: Vec<C64>, b: Vec<C64>) -> Vec<usize> {
@@ -54,7 +54,6 @@ pub fn fft_poly(a: Vec<C64>, b: Vec<C64>) -> Vec<usize> {
     let B = fft(&b, &z);
     let C = A.iter().zip(B.iter()).map(|(&x, &y)| x * y).collect();
     let C = fft(&C, &RootOfUnity{n: z.n, p: -1, k: z.k});
-    let E = C.iter().map(|&c|(c / Complex::new((a.len() * 2) as f64, 0.0)).re.round() as usize).collect();
-    E
+    C.iter().map(|&c|(c / Complex::new((a.len() * 2) as f64, 0.0)).re.round() as usize).collect()
 }
 
