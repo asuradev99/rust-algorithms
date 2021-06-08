@@ -30,7 +30,7 @@ impl RootOfUnity {
     }
 }
 
-//Main fast fourier transform subroutine, both input and output are vectors of complex floating-point numbers
+//Main fast fourier transform subroutine, which uses the Cooley-Tukey algorithm to multiply two large numbers; both input and output are vectors of complex floating-point numbers
 pub fn fft(p: &Vec<C64>, z: &RootOfUnity) -> Vec<C64> {
     if z.n == z.k {
         return vec![p.iter().sum()];
