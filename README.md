@@ -22,9 +22,10 @@ This is a collection of algorithms I have implemented in Rust.
 
 
 ## List of WIP/Todo Algorithms: 
-- Quick Sort
-- Shell Sort
-- Pathfinding Algorithms (A*, Breadth/Depth First Search, Dijkstra, Distance-vector, etc.)
+- Sorting (Shell sort, Heap Sort, Quick Sort, Counting Sort,m )
+- Graph Algorithms (Kruskal's algorithm, Tree traversals, Topo Sort Algorithm)
+- Pathfinding Algorithms (A*, Breadth/Depth First Search, Dijkstra, Distance-vector, Lee's Algorithm, etc.)
+- Number Theory Algorithms (GCD-finding Algorithms, Integer factorization, Karatsuba's multiplication algorithm, primality test algorithms)
 
 
 

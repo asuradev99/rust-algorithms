@@ -9,8 +9,8 @@ use num::complex::Complex;
 type C64 = Complex<f64>;
 
 pub fn criterion_benchmark(c: &mut Criterion) {
-    let mut group = c.benchmark_group("Fibonacci");
-    for i in 1..16 {
+    let mut group = c.benchmark_group("Multiplication Algorithms");
+    for i in 1..10 {
         let mut rng = rand::thread_rng();
         let n: i64 = 2i64.pow(i);
         let a: Vec<u8> = (0..n).map(|_| rng.gen_range(0..10)).collect();
