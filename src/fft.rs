@@ -10,6 +10,7 @@ pub struct RootOfUnity {
     k: isize,
 }
 
+//Symbolic implementation of a primitive nth root of unity to be used in the Fast Fourier Transform.
 impl RootOfUnity {
     pub fn new(n: isize) -> Self {
         RootOfUnity { n: n, p: 1, k: 1 }
@@ -29,6 +30,7 @@ impl RootOfUnity {
     }
 }
 
+//Main fast fourier transform subroutine, both input and output are vectors of complex floating-point numbers
 pub fn fft(p: &Vec<C64>, z: &RootOfUnity) -> Vec<C64> {
     if z.n == z.k {
         return vec![p.iter().sum()];
@@ -48,6 +50,7 @@ pub fn fft(p: &Vec<C64>, z: &RootOfUnity) -> Vec<C64> {
     P
 }
 
+//Uses the fft for polynomial multiplication, with a complexity of approximately O(nlog(n))
 pub fn fft_poly(a: Vec<C64>, b: Vec<C64>) -> Vec<usize> {
     let z = RootOfUnity::new((a.len() * 2) as isize);
     let A = fft(&a, &z);
@@ -56,4 +59,6 @@ pub fn fft_poly(a: Vec<C64>, b: Vec<C64>) -> Vec<usize> {
     let C = fft(&C, &RootOfUnity{n: z.n, p: -1, k: z.k});
     C.iter().map(|&c|(c / Complex::new((a.len() * 2) as f64, 0.0)).re.round() as usize).collect()
 }
+
+
 

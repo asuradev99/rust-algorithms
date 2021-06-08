@@ -1,9 +1,9 @@
 #![allow(dead_code, non_snake_case, unused_variables)]
 
-mod fft;
-mod sorting;
-mod mul; 
+extern crate algorithms; 
 
+pub mod fft; 
+pub mod mul; 
 
 use num::complex::Complex;
 
